@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS genres(genres_id VARCHAR(80) NOT NULL PRIMARY KEY, genres_name VARCHAR(40) NOT NULL);
+CREATE TABLE IF NOT EXISTS artists(artists_id VARCHAR(80) NOT NULL PRIMARY KEY, artists_name VARCHAR(80) NOT NULL);
+CREATE TABLE IF NOT EXISTS artists_genres(artists_genres_id VARCHAR(80) NOT NULL PRIMARY KEY, artists_id varchar(80) NOT NULL REFERENCES artists(artists_id), genres_id varchar(80) NOT NULL REFERENCES genres(genres_id));
+
+CREATE TABLE IF NOT EXISTS albums (albums_id VARCHAR(80) NOT NULL PRIMARY KEY, album_name VARCHAR(80) NOT NULL, year_of_release int NOT null);
+CREATE TABLE IF NOT EXISTS artists_albums(artists_albums_id VARCHAR(80) NOT NULL PRIMARY KEY, artists_id varchar(80) NOT NULL REFERENCES artists(artists_id), albums_id varchar(80) NOT NULL REFERENCES albums(albums_id));
+CREATE TABLE IF NOT EXISTS tracks (tracks_id VARCHAR(80) NOT NULL PRIMARY KEY, albums_id varchar(80) NOT NULL REFERENCES albums(albums_id), track_name VARCHAR(80) NOT NULL, duration VARCHAR(80) NOT NULL);
+
+CREATE TABLE IF NOT EXISTS songster (songster_id VARCHAR(80) NOT NULL PRIMARY KEY, songster_name VARCHAR(40) NOT NULL, year_of_release int NOT null);
+CREATE TABLE IF NOT EXISTS songster_tracks (songster_tracks_id VARCHAR(80) PRIMARY KEY, tracks_id VARCHAR(80) NOT NULL REFERENCES tracks(tracks_id), songster_id VARCHAR(80) NOT NULL REFERENCES songster(songster_id));
